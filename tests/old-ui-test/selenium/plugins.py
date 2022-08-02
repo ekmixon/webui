@@ -42,9 +42,8 @@ xpaths = {
 
 class plugin_test(unittest.TestCase):
     @classmethod
-    def setUpClass(inst):
+    def setUpClass(cls):
         driver.implicitly_wait(30)
-        pass
 
     # Test navigation Account>Users>Hover>New User and enter username,fullname,password,confirmation and wait till user is  visibile in the list
     def test_01_00_nav_plug_available(self):
@@ -61,7 +60,7 @@ class plugin_test(unittest.TestCase):
             ui_element=driver.find_element_by_xpath('//*[@id="breadcrumb-bar"]/ul/li[2]/a')
             # get the weather data
             page_data=ui_element.text
-            print ("the Page now is: " + page_data)
+            print(f"the Page now is: {page_data}")
             # assert response
             self.assertTrue("Available" in page_data)
             #taking screenshot
@@ -138,7 +137,7 @@ class plugin_test(unittest.TestCase):
 
 
     @classmethod
-    def tearDownClass(inst):
+    def tearDownClass(cls):
         pass
 
 def run_plugin_test(webdriver):

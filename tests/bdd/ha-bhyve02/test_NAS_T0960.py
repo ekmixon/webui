@@ -1,6 +1,7 @@
 # coding=utf-8
 """High Availability (tn-bhyve01) feature tests."""
 
+
 import time
 import os
 import pytest
@@ -23,8 +24,8 @@ from pytest_bdd import (
 )
 
 localHome = os.path.expanduser('~')
-dotsshPath = localHome + '/.ssh'
-keyPath = localHome + '/.ssh/ui_test_id_rsa'
+dotsshPath = f'{localHome}/.ssh'
+keyPath = f'{localHome}/.ssh/ui_test_id_rsa'
 
 setup_ssh_agent()
 if os.path.isdir(dotsshPath) is False:

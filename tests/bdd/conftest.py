@@ -103,7 +103,7 @@ def pytest_runtest_makereport(item):
     """
     outcome = yield
     report = outcome.get_result()
-    if report.when == 'call' or report.when == "setup":
+    if report.when in ['call', "setup"]:
         xfail = hasattr(report, 'wasxfail')
         if (report.skipped and xfail) or (report.failed and not xfail):
             screenshot_name = f'screenshot/{report.nodeid.replace("::", "_")}.png'
@@ -131,9 +131,8 @@ def save_screenshot(name):
 
 
 def save_traceback(name):
-    traceback_file = open(name, 'w')
-    traceback_file.writelines(web_driver.find_element_by_xpath('//div[@id="err-bt-text"]').text)
-    traceback_file.close()
+    with open(name, 'w') as traceback_file:
+        traceback_file.writelines(web_driver.find_element_by_xpath('//div[@id="err-bt-text"]').text)
 
 
 def element_exist(xpath):

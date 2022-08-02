@@ -59,7 +59,7 @@ def test_02_create_newgroup(browser):
     browser.find_element_by_xpath(xpaths['fabAction']).click()
     # wait on the page to load
     wait = wait_on_element(browser, xpaths['newGroupName'])
-    assert wait, f'Loading Groups Add page timeout'
+    assert wait, 'Loading Groups Add page timeout'
     # Enter New Groupname
     browser.find_element_by_xpath(xpaths['newGroupName']).send_keys(newgroup)
     # Click on save new Group button
@@ -70,7 +70,7 @@ def test_02_create_newgroup(browser):
     # taking screenshot
     test_name = sys._getframe().f_code.co_name
     take_screenshot(browser, script_name, test_name)
-    assert wait, f'Loading Users page timeout'
+    assert wait, 'Loading Users page timeout'
     no_error = error_check(browser)
     assert no_error['result'], no_error['traceback']
 
@@ -80,7 +80,7 @@ def test_03_create_supergroup(browser):
     browser.find_element_by_xpath(xpaths['fabAction']).click()
     # wait on the page to load
     wait = wait_on_element(browser, xpaths['newGroupName'])
-    assert wait, f'Loading Groups Add page timeout'
+    assert wait, 'Loading Groups Add page timeout'
     # Enter New Groupname
     browser.find_element_by_xpath(xpaths['newGroupName']).send_keys(supergroup)
     # Check Permit sudo  checkbox
@@ -93,7 +93,7 @@ def test_03_create_supergroup(browser):
     # taking screenshot
     test_name = sys._getframe().f_code.co_name
     take_screenshot(browser, script_name, test_name)
-    assert wait, f'Loading Users page timeout'
+    assert wait, 'Loading Users page timeout'
     no_error = error_check(browser)
     assert no_error['result'], no_error['traceback']
 
@@ -103,7 +103,7 @@ def test_04_create_duplicategroup(browser):
     browser.find_element_by_xpath(xpaths['fabAction']).click()
     # wait on the page to load
     wait = wait_on_element(browser, xpaths['newGroupName'])
-    assert wait, f'Loading Groups Add page timeout'
+    assert wait, 'Loading Groups Add page timeout'
     # Enter New Groupname
     browser.find_element_by_xpath(xpaths['newGroupName']).send_keys(newgroup)
     # Click on save new Group button
@@ -119,7 +119,7 @@ def test_04_create_duplicategroup(browser):
     # taking screenshot
     test_name = sys._getframe().f_code.co_name
     take_screenshot(browser, script_name, test_name)
-    assert wait, f'Loading Users page timeout'
+    assert wait, 'Loading Users page timeout'
     no_error = error_check(browser)
     assert no_error['result'], no_error['traceback']
 

@@ -63,17 +63,13 @@ def wait_on_element_disappear(driver, wait, xpath):
             return True
         # this just to slow down the loop
         time.sleep(0.1)
-    else:
-        return False
+    return False
 
 
 def attribute_value_exist(driver, xpath, attribute, value):
     element = driver.find_element_by_xpath(xpath)
     class_attribute = element.get_attribute(attribute)
-    if value in class_attribute:
-        return True
-    else:
-        return False
+    return value in class_attribute
 
 
 def wait_for_attribute_value(driver, wait, xpath, attribute, value):
@@ -83,8 +79,7 @@ def wait_for_attribute_value(driver, wait, xpath, attribute, value):
             return True
         # this just to slow down the loop
         time.sleep(0.1)
-    else:
-        return False
+    return False
 
 
 def ssh_cmd(command, username, password, host):
@@ -118,11 +113,10 @@ def start_ssh_agent():
     match = OUTPUT_PATTERN.search(process.stdout)
     if match is None:
         return False
-    else:
-        agentData = match.groupdict()
-        os.environ['SSH_AUTH_SOCK'] = agentData['socket']
-        os.environ['SSH_AGENT_PID'] = agentData['pid']
-        return True
+    agentData = match.groupdict()
+    os.environ['SSH_AUTH_SOCK'] = agentData['socket']
+    os.environ['SSH_AGENT_PID'] = agentData['pid']
+    return True
 
 
 def is_agent_setup():
@@ -130,34 +124,22 @@ def is_agent_setup():
 
 
 def setup_ssh_agent():
-    if is_agent_setup():
-        return True
-    else:
-        return start_ssh_agent()
+    return True if is_agent_setup() else start_ssh_agent()
 
 
 def create_key(keyPath):
     process = run(f'ssh-keygen -t rsa -f {keyPath} -q -N ""', shell=True)
-    if process.returncode != 0:
-        return False
-    else:
-        return True
+    return process.returncode == 0
 
 
 def if_key_listed():
     process = run('ssh-add -L', shell=True)
-    if process.returncode != 0:
-        return False
-    else:
-        return True
+    return process.returncode == 0
 
 
 def add_ssh_key(keyPath):
     process = run(['ssh-add', keyPath])
-    if process.returncode != 0:
-        return False
-    else:
-        return True
+    return process.returncode == 0
 
 
 def run_cmd(command):
@@ -170,42 +152,36 @@ def run_cmd(command):
 
 
 def get(url, api_path, auth):
-    get_it = requests.get(
-        f'http://{url}/api/v2.0/{api_path}',
-        headers=header,
-        auth=auth
+    return requests.get(
+        f'http://{url}/api/v2.0/{api_path}', headers=header, auth=auth
     )
-    return get_it
 
 
 def post(url, api_path, auth, payload=None):
-    post_it = requests.post(
+    return requests.post(
         f'http://{url}/api/v2.0/{api_path}',
         headers=header,
         auth=auth,
-        data=json.dumps(payload) if payload else None
+        data=json.dumps(payload) if payload else None,
     )
-    return post_it
 
 
 def put(url, api_path, auth, payload=None):
-    put_it = requests.put(
+    return requests.put(
         f'http://{url}/api/v2.0/{api_path}',
         headers=header,
         auth=auth,
-        data=json.dumps(payload) if payload else None
+        data=json.dumps(payload) if payload else None,
     )
-    return put_it
 
 
 def delete(url, api_path, auth, payload=None):
-    delete_it = requests.delete(
+    return requests.delete(
         f'http://{url}/api/v2.0/{api_path}',
         headers=header,
         auth=auth,
-        data=json.dumps(payload) if payload else None
+        data=json.dumps(payload) if payload else None,
     )
-    return delete_it
 
 
 def ssh_sudo(cmd, host, user, password):
@@ -236,7 +212,7 @@ def interactive_ssh(cmd, host, user, password):
 def make_bytes(item):
     '''Cast the item to a bytes data type.'''
 
-    if isinstance(item, bytes) or isinstance(item, bytearray):
+    if isinstance(item, (bytes, bytearray)):
         return item
     if isinstance(item, str):
         return bytes(item, 'UTF-8')
@@ -246,7 +222,7 @@ def make_bytes(item):
         return b''.join([make_bytes(i) for i in item])
 
     # We should get here, but if we do we need a better solution
-    raise TypeError('Cannot easily cast type {} to bytes'.format(type(item)))
+    raise TypeError(f'Cannot easily cast type {type(item)} to bytes')
 
 
 def word_xor(data, key):

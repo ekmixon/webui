@@ -67,9 +67,12 @@ def the_directory_services_page_should_open_then_click_ldap_settings_button(driv
     # Verify the box is starting to load
     assert wait_on_element(driver, 5, '//h3[text()="Active Directory"]')
     assert wait_on_element(driver, 5, '//mat-checkbox[contains(@ix-auto, "Enable (requires password")]', 'clickable')
-    checkbox_checked = attribute_value_exist(driver, '//mat-checkbox[contains(@ix-auto, "Enable (requires password")]', 'class', 'mat-checkbox-checked')
-    # The checkbox should be checked
-    if checkbox_checked:
+    if checkbox_checked := attribute_value_exist(
+        driver,
+        '//mat-checkbox[contains(@ix-auto, "Enable (requires password")]',
+        'class',
+        'mat-checkbox-checked',
+    ):
         driver.find_element_by_xpath('//mat-checkbox[contains(@ix-auto, "Enable (requires password")]').click()
     assert wait_on_element(driver, 5, '//span[contains(text(),"Save")]', 'clickable')
     driver.find_element_by_xpath('//span[contains(text(),"Save")]').click()

@@ -54,32 +54,31 @@ def convert_jira_feature_file(directory):
     for feature_file in feature_list:
         feature = open(f'{directory}/features/{feature_file}', 'r')
         old_feature = feature.readlines()
-        new_feature = open(f'{directory}/features/{feature_file}', 'w')
-        for line in old_feature:
-            if 'Feature:' in line:
-                feature_list = line.split(':')
-                if len(feature_list) == 3:
-                    new_line = f'{feature_list[0]}:{feature_list[1]}\n'
-                    new_feature.writelines(new_line)
+        with open(f'{directory}/features/{feature_file}', 'w') as new_feature:
+            for line in old_feature:
+                if 'Feature:' in line:
+                    feature_list = line.split(':')
+                    if len(feature_list) == 3:
+                        new_line = f'{feature_list[0]}:{feature_list[1]}\n'
+                        new_feature.writelines(new_line)
+                    else:
+                        new_feature.writelines(line)
+                elif 'Scenario' in line:
+                    scenario_list = line.split(':')
+                    if len(scenario_list) == 3:
+                        new_line = f'{scenario_list[0]}:{scenario_list[2]}'
+                        new_feature.writelines(new_line)
+                    else:
+                        new_feature.writelines(line)
                 else:
                     new_feature.writelines(line)
-            elif 'Scenario' in line:
-                scenario_list = line.split(':')
-                if len(scenario_list) == 3:
-                    new_line = f'{scenario_list[0]}:{scenario_list[2]}'
-                    new_feature.writelines(new_line)
-                else:
-                    new_feature.writelines(line)
-            else:
-                new_feature.writelines(line)
-        new_feature.close()
 
 
 # look if all the argument are there.
 try:
     myopts, args = getopt.getopt(argument[1:], None, option_list)
 except getopt.GetoptError as e:
-    print(str(e))
+    print(e)
     print(UsageMSG)
     sys.exit(1)
 
@@ -138,8 +137,7 @@ def run_testing():
             'in this directory'
         print(msg)
         print('config.cfg example: ')
-        cfg_msg = "[NAS_CONFIG]\n"
-        cfg_msg += "ip = 0.0.0.0\n"
+        cfg_msg = "[NAS_CONFIG]\n" + "ip = 0.0.0.0\n"
         cfg_msg += "password = testing\n"
         if test_suite == 'scale-validation':
             cfg_msg += "version = TrueNAS-12.0-U2\n"

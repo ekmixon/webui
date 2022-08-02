@@ -90,16 +90,16 @@ def wait_on_element(driver, xpath, timeout=120):
 
 def error_check(driver):
     title_xpath = "//h1[contains(.,'report_problem error')]"
-    dialog_xpath = '//error-dialog/div/span'
-    tearDown_xpath = "//span[contains(.,'More info...')]"
-    traceback_xpath = "//div[2]/textarea"
-    closeButton = '//*[contains(text(), "Close")]'
     if is_element_present(driver, title_xpath):
+        dialog_xpath = '//error-dialog/div/span'
         dialog = driver.find_element_by_xpath(dialog_xpath)
         dialog_text = dialog.text
+        tearDown_xpath = "//span[contains(.,'More info...')]"
         driver.find_element_by_xpath(tearDown_xpath).click()
+        traceback_xpath = "//div[2]/textarea"
         traceback = driver.find_element_by_xpath(traceback_xpath)
         traceback_text = traceback.text
+        closeButton = '//*[contains(text(), "Close")]'
         driver.find_element_by_xpath(closeButton).click()
 
         return {'result': False, 'dialog': dialog_text, 'traceback': traceback_text}
@@ -109,7 +109,7 @@ def error_check(driver):
 # screenshot function
 def take_screenshot(driver, scriptname, testname):
     time.sleep(1)
-    png_file = cwd + "/screenshot/" + scriptname + "-" + testname + ".png"
+    png_file = f"{cwd}/screenshot/{scriptname}-{testname}.png"
     driver.save_screenshot(png_file)
 
 
@@ -123,7 +123,7 @@ def status_check(driver, which):
     else:
         print("current status is: STOPPED")
     # get the status data
-    print("current status is: " + services_switch_xpath[which])
+    print(f"current status is: {services_switch_xpath[which]}")
 
 
 def status_change(driver, which):
@@ -140,24 +140,21 @@ def plugin_install(driver, action, name):
     # the xpath of user or group , sub-menu{User/Group} num specifies the
     # column of the 3 dots which is different in user/group delNum specifies
     # the option number where edit is after clicking on the 3 dots
-    if (action == "install"):
-        num = 5
-        delNum = 1
-        path = "Available"
-        # ED = "6"
-    elif (action == "check"):
+    if action == "check":
         num = 5
         delNum = 2
         path = "Installed"
-        # ED = "5"
-
+    elif action == "install":
+        num = 5
+        delNum = 1
+        path = "Available"
     # Click User submenu
-    driver.find_element_by_xpath(xpaths['submenu' + path]).click()
+    driver.find_element_by_xpath(xpaths[f'submenu{path}']).click()
     # wait till the list is loaded
     time.sleep(2)
     index = 1
     ui_text = "null"
-    for x in range(0, 33):
+    for x in range(33):
         if is_element_present(driver, '//*[@id="entity-table-component"]/div[' + str(num) + ']/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + str(x) + ']/datatable-body-row/div[2]/datatable-body-cell[1]/div/div'):
             ui_element= driver.find_element_by_xpath('//*[@id="entity-table-component"]/div[' + str(num) + ']/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + str(x) + ']/datatable-body-row/div[2]/datatable-body-cell[1]/div/div')
             ui_text = ui_element.text
@@ -166,7 +163,7 @@ def plugin_install(driver, action, name):
             index = x
             break
         ui_element = " "
-    print("index, delNum, num: " + str(x) + ", " + str(delNum) + "," + str(num))
+    print(f"index, delNum, num: {str(x)}, {str(delNum)},{str(num)}")
     time.sleep(1)
     # click on the 3 dots
     driver.find_element_by_xpath('//*[@id="entity-table-component"]/div[' + str(num) + ']/ngx-datatable/div/datatable-body/datatable-selection/datatable-scroller/datatable-row-wrapper[' + str(x) + ']/datatable-body-row/div[2]/datatable-body-cell[' + str(num) + ']/div/app-entity-table-actions/div/mat-icon').click()

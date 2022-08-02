@@ -15,10 +15,7 @@ from os import path
 if path.exists("/usr/local/etc/ixautomation.conf"):
     copyfile("/usr/local/etc/ixautomation.conf", "config.py")
     from config import *
-    if "Grid_ip" in locals():
-        grid_server_ip = Grid_ip
-    else:
-        grid_server_ip = "127.0.0.1"
+    grid_server_ip = Grid_ip if "Grid_ip" in locals() else "127.0.0.1"
 else:
     grid_server_ip = "127.0.0.1"
 
@@ -51,14 +48,14 @@ versionlist = ["U"]
 try:
     myopts, args = getopt.getopt(argument[1:], 'it', optionlist)
 except getopt.GetoptError as e:
-    print(str(e))
+    print(e)
     print(UsageMSG)
     sys.exit(1)
 
 for output, arg in myopts:
     if output == '--ip':
         ip = arg
-    if output == "--driver":
+    elif output == "--driver":
         driver_v = arg
 
 try:
@@ -91,10 +88,8 @@ browser = "{browser}"
 ip = "{ip}"
 """
 
-cfg_file = open("config.py", 'w')
-cfg_file.writelines(config_content)
-cfg_file.close()
-
+with open("config.py", 'w') as cfg_file:
+    cfg_file.writelines(config_content)
 pytestcmd = [
     "pytest-3.6",
     "-v",

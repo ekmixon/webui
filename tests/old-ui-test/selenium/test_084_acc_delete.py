@@ -20,7 +20,6 @@ xpaths = {
     'navAccount': '//*[@id="nav-1"]/div/a[1]',
     'submenuUser': '//*[@id="1-1"]',
     'submenuGroup': '//*[@id="1-0"]',
-    # 'confirmCheckbox': '//*[contains(@name, "confirm_checkbox")]',
     'deleteButton': '//*[contains(@name, "ok_button")]',
     'breadcrumbBar1': "//div[@id='breadcrumb-bar']/ul/li/a",
     'breadcrumbBar2': "//*[@id='breadcrumb-bar']/ul/li[2]/a",
@@ -32,7 +31,7 @@ xpaths = {
     'newuserUserDelete': f"//button[@id='action_button_delete__{newuser}']/span/div/p",
     'uncheckuserUserDelete': f"//button[@id='action_button_delete__{uncheckuser}']/span/div/p",
     'superuserUserDelete': f"//button[@id='action_button_delete__{superuser}']/span/div/p",
-    'nouserUserDelete': f"//button[@id='action_button_delete__nuser']/span/div/p",
+    'nouserUserDelete': "//button[@id='action_button_delete__nuser']/span/div/p",
     'newuserGroupMenu': f"//mat-icon[@id='table_actions_menu_button__bsdgrp_group_{newuser}']",
     'superuserGroupMenu': f"//mat-icon[@id='table_actions_menu_button__bsdgrp_group_{superuser}']",
     'newgroupGroupMenu': f"//mat-icon[@id='table_actions_menu_button__bsdgrp_group_{newgroup}']",
@@ -43,8 +42,9 @@ xpaths = {
     'supergroupGroupDelete': f"//button[@id='action_button_delete__{supergroup}']/span",
     'deleteButton': '//*[contains(@name, "ok_button")]',
     'confirmCheckbox': '//*[@id="confirm-dialog__confirm-checkbox"]/label/div',
-    'confirmsecondaryCheckbox': '//*[@id="confirm-dialog__secondary-checkbox"]/label/div'
+    'confirmsecondaryCheckbox': '//*[@id="confirm-dialog__secondary-checkbox"]/label/div',
 }
+
 
 user_list = ['newuser', 'uncheckuser', 'nouser']
 group_list = ['superuser', 'newgroup', 'supergroup']

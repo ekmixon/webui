@@ -89,7 +89,7 @@ def input_my_ldap_smb_test_share_as_the_description_and_click_summit(driver, des
 @then('the ldapsmbshare should be added to the Shares list')
 def the_ldapsmbshare_should_be_added_to_the_shares_list(driver):
     """the ldapsmbshare should be added to the Shares list."""
-    assert wait_on_element(driver, 5, f'//div[contains(.,"ldapsmbshare")]')
+    assert wait_on_element(driver, 5, '//div[contains(.,"ldapsmbshare")]')
 
 
 @then(parsers.parse('send a file to the share with ip/"{ldapsmbshare}" and "{ldap_user}" and "{ldap_password}"'))

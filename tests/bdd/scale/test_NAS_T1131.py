@@ -82,10 +82,18 @@ def the_add_datasetpage_should_open_input_wheel_dataset_for_the_naem_and_click_s
 def the_wheel_dataset_should_be_created_click_the_dataset_three_dots_and_select_view_permissions_then_click_the_pencil_to_edit(driver):
     """the wheel_dataset should be created, click the dataset three dots and select View Permissions, then click the pencil to Edit."""
     time.sleep(4)
-    assert wait_on_element(driver, 10, f'//div[contains(text(),"wheel_dataset")]')
+    assert wait_on_element(driver, 10, '//div[contains(text(),"wheel_dataset")]')
     time.sleep(1)
-    assert wait_on_element(driver, 5, f'//tr[contains(.,"wheel_dataset")]//mat-icon[text()="more_vert"]')
-    driver.find_element_by_xpath(f'//tr[contains(.,"wheel_dataset")]//mat-icon[text()="more_vert"]').click()
+    assert wait_on_element(
+        driver,
+        5,
+        '//tr[contains(.,"wheel_dataset")]//mat-icon[text()="more_vert"]',
+    )
+
+    driver.find_element_by_xpath(
+        '//tr[contains(.,"wheel_dataset")]//mat-icon[text()="more_vert"]'
+    ).click()
+
     time.sleep(1)
     assert wait_on_element(driver, 5, '//button[normalize-space(text())="View Permissions"]')
     driver.find_element_by_xpath('//button[normalize-space(text())="View Permissions"]').click()
@@ -109,8 +117,8 @@ def the_edit_permissions_page_should_open_select_root_for_user_click_on_the_appl
     driver.find_element_by_xpath('(//div[@ix-auto="combobox__Group"]//mat-form-field//input[@data-placeholder="Group"])').send_keys("root")
     time.sleep(1)
     driver.find_element_by_xpath('(//div[@ix-auto="combobox__Group"]//mat-form-field//input[@data-placeholder="Group"])').click()
-    assert wait_on_element(driver, 5, f'//mat-option[@ix-auto="option__root"]')
-    driver.find_element_by_xpath(f'//mat-option[@ix-auto="option__root"]').click()
+    assert wait_on_element(driver, 5, '//mat-option[@ix-auto="option__root"]')
+    driver.find_element_by_xpath('//mat-option[@ix-auto="option__root"]').click()
     assert wait_on_element(driver, 5, '//span[contains(text(),"Save Access Control List")]', 'clickable')
     driver.find_element_by_xpath('//span[contains(text(),"Save Access Control List")]').click()
 
@@ -119,10 +127,18 @@ def the_edit_permissions_page_should_open_select_root_for_user_click_on_the_appl
 def you_should_be_returned_to_the_pool_list_page_click_on_the_wheel_dataset_three_dots_button_view_and_edit_permissions_and_the_edit_permissions_page_should_open(driver):
     """you should be returned to the pool list page, click on the wheel_dataset three dots button, view and edit Permissions, and the Edit Permissions page should open."""
     time.sleep(4)
-    assert wait_on_element(driver, 10, f'//div[contains(text(),"wheel_dataset")]')
+    assert wait_on_element(driver, 10, '//div[contains(text(),"wheel_dataset")]')
     time.sleep(1)
-    assert wait_on_element(driver, 5, f'//tr[contains(.,"wheel_dataset")]//mat-icon[text()="more_vert"]')
-    driver.find_element_by_xpath(f'//tr[contains(.,"wheel_dataset")]//mat-icon[text()="more_vert"]').click()
+    assert wait_on_element(
+        driver,
+        5,
+        '//tr[contains(.,"wheel_dataset")]//mat-icon[text()="more_vert"]',
+    )
+
+    driver.find_element_by_xpath(
+        '//tr[contains(.,"wheel_dataset")]//mat-icon[text()="more_vert"]'
+    ).click()
+
     time.sleep(1)
     assert wait_on_element(driver, 5, '//button[normalize-space(text())="View Permissions"]')
     driver.find_element_by_xpath('//button[normalize-space(text())="View Permissions"]').click()

@@ -84,7 +84,7 @@ def decode_the_tabfile_with_tabfile_string(driver, tabfile_string):
     global tabfile
     global tab_result
     global datafile
-    tabfile_path = os.getcwd() + '/tabfile'
+    tabfile_path = f'{os.getcwd()}/tabfile'
     assert glob.glob(tabfile_path)
     tabfile = sorted(glob.glob(tabfile_path))[-1]
     datafile = open(os.path.expanduser(tabfile_path), 'rb').read()
@@ -104,7 +104,7 @@ def name_the_keytab_and_upload_the_file_and_click_save(driver):
     # define file
     global keytab_file
     global keytab_file_path
-    keytab_file_path = os.getcwd() + '/KEYTABNAME.KEYTAB'
+    keytab_file_path = f'{os.getcwd()}/KEYTABNAME.KEYTAB'
     assert glob.glob(keytab_file_path)
     keytab_file = sorted(glob.glob(keytab_file_path))[-1]
     assert wait_on_element(driver, 7, '//input[@type="file"]', 'clickable')

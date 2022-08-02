@@ -18,8 +18,7 @@ def wait_on_element(driver, wait, loop, xpath):
         time.sleep(wait)
         if is_element_present(driver, xpath):
             return True
-    else:
-        return False
+    return False
 
 
 def wait_on_element_disappear(driver, wait, loop, xpath):
@@ -27,17 +26,13 @@ def wait_on_element_disappear(driver, wait, loop, xpath):
         time.sleep(wait)
         if not is_element_present(driver, xpath):
             return True
-    else:
-        return False
+    return False
 
 
 def attribute_value_exist(driver, xpath, attribute, value):
     element = driver.find_element_by_xpath(xpath)
     class_attribute = element.get_attribute(attribute)
-    if value in class_attribute:
-        return True
-    else:
-        return False
+    return value in class_attribute
 
 
 def wait_for_attribute_value(driver, wait, loop, xpath, attribute, value):
@@ -45,8 +40,7 @@ def wait_for_attribute_value(driver, wait, loop, xpath, attribute, value):
         time.sleep(wait)
         if attribute_value_exist(driver, xpath, attribute, value):
             return True
-    else:
-        return False
+    return False
 
 
 def ssh_cmd(command, username, password, host):

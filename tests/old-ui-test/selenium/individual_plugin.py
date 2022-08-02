@@ -57,12 +57,12 @@ xpaths = {
           'logoutconfirmationButton' : "//*[contains(@name, 'ok_button')]"
           }
 
-ui_url = "http://%s/ui" % ip
+ui_url = f"http://{ip}/ui"
 
 
 class plugin_test(unittest.TestCase):
     @classmethod
-    def setUpClass(inst):
+    def setUpClass(cls):
         global driver
         driver = webdriver.Firefox()
         driver.implicitly_wait(30)
@@ -85,7 +85,7 @@ class plugin_test(unittest.TestCase):
             ui_element=driver.find_element_by_xpath('//*[@id="breadcrumb-bar"]/ul/li/a')
             # get the weather data
             page_data=ui_element.text
-            print ("The page now is: " + page_data)
+            print(f"The page now is: {page_data}")
             # assert response
             self.assertTrue("Dashboard" in page_data)
             # cancelling the tour
@@ -126,7 +126,7 @@ class plugin_test(unittest.TestCase):
 
 
     @classmethod
-    def tearDown(inst):
+    def tearDown(cls):
         # close the browser window
         driver.close()
 

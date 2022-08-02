@@ -1,6 +1,7 @@
 # coding=utf-8
 """SCALE UI: feature tests."""
 
+
 import os
 import pytest
 import time
@@ -22,8 +23,8 @@ from pytest_bdd import (
 )
 
 localHome = os.path.expanduser('~')
-dotsshPath = localHome + '/.ssh'
-keyPath = localHome + '/.ssh/ui_test_id_rsa'
+dotsshPath = f'{localHome}/.ssh'
+keyPath = f'{localHome}/.ssh/ui_test_id_rsa'
 
 setup_ssh_agent()
 if os.path.isdir(dotsshPath) is False:

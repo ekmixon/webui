@@ -30,7 +30,7 @@ def test_01_login(browser, login_json):
         target = dictionary["target"].replace("xpath=", "")
         value = dictionary['value']
 
-        if command == 'open' or command == 'setWindowSize':
+        if command in ['open', 'setWindowSize']:
             pass
         elif command == 'click' and comment == "":
             browser.find_element_by_xpath(target).click()

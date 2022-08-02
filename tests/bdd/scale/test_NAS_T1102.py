@@ -143,8 +143,14 @@ def click_on_system_dataset_pool_select_system_click_save(driver):
     assert wait_on_element(driver, 5, '//h3[contains(.,"System Dataset Pool")]')
     assert wait_on_element(driver, 5, '//mat-select[@ix-auto="select__Select Pool"]', 'clickable')
     driver.find_element_by_xpath('//mat-select[@ix-auto="select__Select Pool"]').click()
-    assert wait_on_element(driver, 5, f'//mat-option[@ix-auto="option__Select Pool_system"]')
-    driver.find_element_by_xpath(f'//mat-option[@ix-auto="option__Select Pool_system"]').click()
+    assert wait_on_element(
+        driver, 5, '//mat-option[@ix-auto="option__Select Pool_system"]'
+    )
+
+    driver.find_element_by_xpath(
+        '//mat-option[@ix-auto="option__Select Pool_system"]'
+    ).click()
+
     assert wait_on_element(driver, 30, '//button[@ix-auto="button__SAVE"]', 'clickable')
     driver.find_element_by_xpath('//button[@ix-auto="button__SAVE"]').click()
 

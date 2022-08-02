@@ -109,10 +109,18 @@ def the_edit_permissions_page_should_open_select_ericbsd_for_user_click_on_the_a
 def you_should_be_returned_to_the_pool_list_page_click_on_the_ericbsd_dataset_three_dots_button_view_and_edit_permissions_and_the_edit_permissions_page_should_open(driver):
     """you should be returned to the pool list page, click on the ericbsd_dataset three dots button, view and edit Permissions, and the Edit Permissions page should open."""
     time.sleep(4)
-    assert wait_on_element(driver, 10, f'//div[contains(text(),"ericbsd_dataset")]')
+    assert wait_on_element(driver, 10, '//div[contains(text(),"ericbsd_dataset")]')
     time.sleep(1)
-    assert wait_on_element(driver, 5, f'//tr[contains(.,"ericbsd_dataset")]//mat-icon[text()="more_vert"]')
-    driver.find_element_by_xpath(f'//tr[contains(.,"ericbsd_dataset")]//mat-icon[text()="more_vert"]').click()
+    assert wait_on_element(
+        driver,
+        5,
+        '//tr[contains(.,"ericbsd_dataset")]//mat-icon[text()="more_vert"]',
+    )
+
+    driver.find_element_by_xpath(
+        '//tr[contains(.,"ericbsd_dataset")]//mat-icon[text()="more_vert"]'
+    ).click()
+
     time.sleep(1)
     assert wait_on_element(driver, 5, '//button[normalize-space(text())="View Permissions"]')
     driver.find_element_by_xpath('//button[normalize-space(text())="View Permissions"]').click()

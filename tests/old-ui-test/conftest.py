@@ -29,9 +29,6 @@ def webDriverFirefox():
         binary = FirefoxBinary('/usr/local/bin/firefox')
     elif system() == "Linux":
         binary = FirefoxBinary('/usr/bin/firefox')
-    elif system() == "Windows":
-        pass
-
     caps = DesiredCapabilities.FIREFOX.copy()
     caps['marionette'] = True
     caps['screenResolution'] = '2560x1440'
@@ -70,13 +67,12 @@ def browser():
 @pytest.fixture
 def ui_url():
     global url
-    url = "http://%s" % ip
+    url = f"http://{ip}"
     return url
 
 
 @pytest.fixture
 def login_json():
-    json_file = open(f'{cwd}/side/login.side', 'r')
-    data = json.load(json_file)
-    json_file.close()
+    with open(f'{cwd}/side/login.side', 'r') as json_file:
+        data = json.load(json_file)
     return data

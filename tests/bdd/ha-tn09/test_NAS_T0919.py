@@ -314,10 +314,8 @@ def the_list_of_disks_should_appear_in_alphabetical_order_starting_with_ada0_ada
     """The list of disks should appear in alphabetical order starting with ada0-ada1 (the boot devices) and da0-da15 the disks we will wipe in next step to create pools."""
     # Verify disk are sorted
     disk_list = {1: 'ada0', 2: 'ada1'}
-    add_num = 3
-    for number in range(9):
+    for add_num, number in enumerate(range(9), start=3):
         disk_list[add_num] = f'da{number}'
-        add_num += 1
     for num in list(disk_list.keys()):
         disk = driver.find_element_by_xpath(f'(//datatable-body-cell[2]/div/div)[{num}]').text
         assert disk == disk_list[num]

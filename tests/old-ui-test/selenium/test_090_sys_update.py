@@ -58,23 +58,22 @@ def test_02_check_update_now(browser):
             print("There is an available upgrade")
             # assert response
             assert "Upgrade" in update_data, update_data
-            error_check_sys()
         else:
             print("There is an unexpected issue: it is not an upgrade")
-            error_check_sys()
     elif is_element_present(browser, "/html/body/app-root/app-admin-layout/md-sidenav-container/div[6]/div/app-update/md-card/div/div[4]/div/div"):
         ui_element2 = browser.find_element_by_xpath("/html/body/app-root/app-admin-layout/md-sidenav-container/div[6]/div/app-update/md-card/div/div[4]/div/div")
         update_data2 = ui_element2.text
         if "No" in update_data2:
             print("There is no update available")
             assert "No" in update_data2, update_data2
-            error_check_sys()
         else:
-            print("There is an unexpected issue: something wrong with no update available element:" + update_data2)
-            error_check_sys()
+            print(
+                f"There is an unexpected issue: something wrong with no update available element:{update_data2}"
+            )
+
     else:
         print("There is an unexpected issue")
-        error_check_sys()
+    error_check_sys()
     # taking screenshot
     test_name = sys._getframe().f_code.co_name
     take_screenshot(browser, script_name, test_name)
